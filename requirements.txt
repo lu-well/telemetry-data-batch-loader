@@ -1,0 +1,8 @@
+datetime
+pandas
+numpy
+mysql
+mysql-connector-python
+uuid
+os
+time
