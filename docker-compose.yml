@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_server
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Admin1234!
+      MYSQL_DATABASE: data_engineering
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pAdmin1234!"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  python_app:
+    build: .
+    container_name: data_batch_uploader
+    depends_on:
+      mysql:
+        condition: service_healthy
+    working_dir: /app
+    volumes:
+      - .:/app
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Admin1234!
+      MYSQL_DATABASE: data_engineering
+      MYSQL_PORT: "3306"
+    command: ["python", "batch_uploads.py"]
+
+volumes:
+  mysql_data:
