@@ -51,4 +51,4 @@ Chronological order is essential for future analyses as batches are named with t
 
 Time taken to upload all batches is displayed once the process is successfully completed, so that the speed and efficiency of the system can be monitored.
 
-If the batch upload is unsuccessful, the system will automatically restart and attempt to complete the task again. If it is still unsuccessful after multiple attempts, an error message is returned advising the user to check for issues in the file and their system.
+If the batch upload is unsuccessful, the system will automatically restart and attempt to complete the task again, up to 5 times. If it is still unsuccessful after 5 attempts, an error message is returned advising the user to check for issues in the upload file and their operating system.
